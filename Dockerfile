@@ -1,14 +1,11 @@
+FROM python:3
 
-RUN apt-get install python3 -y
+WORKDIR /usr/src/app
 
-RUN echo $(python3 -m site --user-base)
-
-COPY requirements.txt  .
-
-ENV PATH /home/root/.local/bin:${PATH}
+COPY requirements.txt ./
 
 RUN  apt-get update && apt-get install -y python3-pip && pip install -r requirements.txt  
 
 COPY . .
 
-CMD python websocket_server.py
+CMD python server.py
